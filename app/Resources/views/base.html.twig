@@ -2,12 +2,71 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Healthy food and herbs{% endblock %}</title>
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+            <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+        {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+    <body id="{% block body_id %}{% endblock %}">
+
+    {% block header %}
+
+
+        <nav class="navbar my-nav navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#"></a></div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="defaultNavbar1">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="#">Храни и напитки<span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Билки</a></li>
+                        <li><a href="#">Козметика</a></li>
+                        <li><a href="#">Блог</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Регистрация</a></li>
+                        <li><a href="{{ path('security_login') }}">Вход</a></li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+    {% endblock %}
+
+    <div class="wrapper">
+        <div class="inner">
+            <div class="content">
+        {% block body %}
+                    {% block main %}{% endblock %}
+        {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% block footer %}
+        <footer></footer>
+    {% endblock %}
+
+
+    {% block javascripts %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="{{ asset('js/js.js')}}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script>
+            new WOW().init();
+        </script>{% endblock %}
     </body>
 </html>

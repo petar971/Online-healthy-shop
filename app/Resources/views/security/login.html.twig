@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block body_id 'login' %}
+{% block main %}
+
+    <div class="wrapper1 fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+
+
+            <!-- Login Form -->
+            <form>
+                <label for="login"></label><input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
+                <label for="password"></label><input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+                <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Forgot Password?</a>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
