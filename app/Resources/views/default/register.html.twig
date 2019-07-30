@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body_id 'login' %}
+{% block main %}
+
+    <div class="wrapper1 fadeInDown">
+        <div id="formContent">
+
+
+            <form>
+                <label for="user_fullName"></label><input type="text" class="fadeIn" id="user_fullName" placeholder="Име" name="user[fullName]" required>
+                <input class="fadeIn" id="user_fullName" name="user[fullName]" placeholder="Фамилия" required
+                       type="text">
+                <label for="login"></label><input type="text" id="login" class="fadeIn second" name="login" placeholder="Ел.поща">
+                <label for="password"></label><input type="text" id="password" class="fadeIn third" name="login" placeholder="Парола">
+
+                <input type="submit" class="fadeIn fourth btn btn-success" value="Вход">
+            </form>
+        </div>
+    </div>
+{% endblock %}

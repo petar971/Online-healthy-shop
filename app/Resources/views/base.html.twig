@@ -32,11 +32,15 @@
                         <li><a href="#">Козметика</a></li>
                         <li><a href="#">Блог</a></li>
                     </ul>
+                    {% if app.user %}
+
+                    {% else %}
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Регистрация</a></li>
+                        <li><a href="{{ path('user_register') }}">Регистрация</a></li>
                         <li><a href="{{ path('security_login') }}">Вход</a></li>
 
                     </ul>
+                    {% endif %}
                 </div>
                 <!-- /.navbar-collapse -->
             </div>
