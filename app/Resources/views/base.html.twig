@@ -26,9 +26,12 @@
                     <a class="navbar-brand" href="#"></a></div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="defaultNavbar1">
+
                     {% if app.user %}
                     <ul class="nav navbar-nav">
-
+                        {% if app.getUser() and (app.getUser().isAdmin()) %}
+                            <li><a href="{{ path('admin_panel') }}">Admin Panel</a></li>
+                        {% endif %}
                         <li class=""><a href="#">Храни и напитки<span class="sr-only">(current)</span></a></li>
                         <li><a href="#">Билки</a></li>
                         <li><a href="#">Козметика</a></li>
@@ -36,6 +39,9 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
+
+
+
                         <li><a href="{{ path('blog_index') }}">Профил</a></li>
                         <li><a href="{{ path('security_logout') }}">Изход</a></li>
 
@@ -48,6 +54,7 @@
                     </ul>
 
                     {% endif %}
+
                 </div>
                 <!-- /.navbar-collapse -->
             </div>

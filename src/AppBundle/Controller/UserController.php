@@ -48,6 +48,9 @@ class UserController extends Controller
 
 
         if($form->isSubmitted()) {
+$password=$this->get('security.password_encoder')
+    ->encodePassword($user,$user->getPassword());
+$user->setPassword($password);
             /*if (null !== )) {
                 $this->addFlash("error", "Email already taken");
                 return $this->render("default/register.html.twig",

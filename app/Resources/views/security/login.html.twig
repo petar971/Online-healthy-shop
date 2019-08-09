@@ -2,7 +2,7 @@
 {% block body_id 'login' %}
 {% block main %}
 
-    {#<div class="wrapper1 fadeInDown">
+    <div class="wrapper1 fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
 
@@ -25,9 +25,9 @@
             </div>
 
         </div>
-    </div>#}
+    </div>
 
-    <div class="container body-content span=8 offset=2">
+   {# <div class="container body-content span=8 offset=2">
         <div class="well">
             <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">
                 <fieldset>
@@ -47,7 +47,7 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            {#<a class="btn btn-default" href="{{ path('blog_index') }}">Cancel</a>#}
+                            #}{#<a class="btn btn-default" href="{{ path('blog_index') }}">Cancel</a>#}{#
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </div>
@@ -55,5 +55,5 @@
                 </fieldset>
             </form>
         </div>
-    </div>
+    </div>#}
 {% endblock %}
