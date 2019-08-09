@@ -2,7 +2,7 @@
 {% block body_id 'login' %}
 {% block main %}
 
-    <div class="wrapper1 fadeInDown">
+    {#<div class="wrapper1 fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
 
@@ -10,11 +10,12 @@
 
 
             <!-- Login Form -->
-            <form>
+            <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">
                 <h3  class="fadeIn first"style="text-align: center; color:limegreen; font-family: Comic Sans MS, cursive, sans-serif">Вход</h3>
 
-                <label for="login"></label><input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
-                <label for="password"></label><input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+                <label for="user_email"></label><input type="text" id="user_email" class="fadeIn second" name="_username" placeholder="email">
+                <label for="password"></label><input type="text" id="password" class="fadeIn third" name="_password" placeholder="password">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                 <input type="submit" class="fadeIn fourth btn btn-success" value="Вход">
             </form>
 
@@ -23,6 +24,36 @@
                 <a class="underlineHover" href="#">Забравена парола?</a>
             </div>
 
+        </div>
+    </div>#}
+
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">
+                <fieldset>
+                    <legend>Login</legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_email">Email</label>
+                        <div class="col-sm-4 ">
+                            <input type="email" class="form-control" id="user_email" placeholder="Email" name="_username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="password">Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="_password">
+                        </div>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            {#<a class="btn btn-default" href="{{ path('blog_index') }}">Cancel</a>#}
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
         </div>
     </div>
 {% endblock %}

@@ -1,21 +1,26 @@
 {% extends 'base.html.twig' %}
-{% block body_id 'login' %}
+{% block body_id 'register' %}
 {% block main %}
 
     <div class="wrapper1 fadeInDown">
         <div id="formContent">
 
 
-            <form>
+            <form action="{{ path('user_register') }}" method="post">
+                <fieldset>
                 <h3  class="fadeIn first"style="text-align: center; color:limegreen; font-family: Comic Sans MS, cursive, sans-serif">Регистрация</h3>
-                <label for="user_fullName"></label><input type="text" class="fadeIn" id="user_fullName" placeholder="Име" name="user[fullName]" required>
-                <input class="fadeIn" id="user_fullName" name="user[fullName]" placeholder="Фамилия" required
+                <label for=user_FirstName"></label><input type="text" class="fadeIn" id="user_FirstName" placeholder="Име" name="user[firstName]">
+                <input class="fadeIn" id="user_LastName" name="user[lastName]" placeholder="Фамилия"
                        type="text">
-                <label for="login"></label><input type="text" id="login" class="fadeIn second" name="login" placeholder="Ел.поща">
-                <label for="password"></label><input type="text" id="password" class="fadeIn third" name="login" placeholder="Парола">
+                <label for="user_email"></label><input type="text" id="user_email" class="fadeIn second" name="user[email]" placeholder="Ел.поща">
+                <label for="user_password"></label><input type="password" id="user_password" class="fadeIn third" name="user[password]" placeholder="Парола">
 
                 <input type="submit" class="fadeIn fourth btn btn-success" value="Вход">
+                </fieldset>
             </form>
+
+            {{  form_row(form._token) }}
+
         </div>
     </div>
 {% endblock %}
