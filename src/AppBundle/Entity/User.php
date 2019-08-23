@@ -61,9 +61,16 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="author")
+     */
+    private $articles;
     public function __construct()
     {
+        $this->articles = new ArrayCollection();
         $this->roles = new ArrayCollection();
+
     }
 
     /**
@@ -180,6 +187,7 @@ class User implements UserInterface
      *         return ['ROLE_USER'];
      *     }
      *
+     *
      * Alternatively, the roles might be stored on a ``roles`` property,
      * and populated in any number of different ways when the user object
      * is created.
@@ -244,6 +252,22 @@ class User implements UserInterface
     public function isAdmin()
     {
         return in_array("ROLE_ADMIN",$this->getRoles());
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param ArrayCollection $articles
+     */
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
     }
 }
 
