@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +21,7 @@ class ArticleType extends AbstractType
             ->add('content',TextType::class)
             ->add('image',FileType::class,
                 [
-                    'data_class' => null
+                    'data_class' => Article::class
                 ]);
     }/**
      * {@inheritdoc}
@@ -30,14 +31,6 @@ class ArticleType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Article'
         ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'appbundle_article';
     }
 
 
