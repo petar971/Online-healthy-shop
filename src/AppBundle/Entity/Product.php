@@ -60,6 +60,15 @@ class Product
      * @ORM\Column(name="image", type="text")
      */
     private $image;
+
+    /**
+     * @var User
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ShoppingCart",mappedBy="product")
+     *
+     *
+     */
+    private $order;
     /**
      * Get id
      *
@@ -196,6 +205,22 @@ class Product
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return User
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param User $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
     }
 }
 

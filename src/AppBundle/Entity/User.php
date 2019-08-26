@@ -66,10 +66,18 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article",mappedBy="author")
      */
     private $articles;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ShoppingCart",mappedBy="user")
+     */
+    private $orders;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->roles = new ArrayCollection();
+        $this->orders=new ArrayCollection();
 
     }
 
@@ -268,6 +276,22 @@ class User implements UserInterface
     public function setArticles($articles)
     {
         $this->articles = $articles;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
+
+    /**
+     * @param ArrayCollection $orders
+     */
+    public function setOrders($orders)
+    {
+        $this->orders = $orders;
     }
 }
 
