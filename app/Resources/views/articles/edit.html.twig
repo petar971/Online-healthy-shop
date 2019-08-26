@@ -1,47 +1,48 @@
 {% extends 'base.html.twig' %}
+
 {% block main %}
+
 
     <div class="container body-content span=8 offset=2">
         <div class="well">
-            <form class="form-horizontal" enctype="multipart/form-data"  action="{{ path('article_create') }}" method="POST">
+            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('article_edit', {id: article.id}) }}" method="POST">
                 <fieldset>
-                    <legend>New Post</legend>
+                    <legend>Edit Post</legend>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="article_title">Заглавие</label>
+                        <label class="col-sm-4 control-label" for="article_title">Post Title</label>
                         <div class="col-sm-4 ">
                             <input type="text" class="form-control" id="article_title" placeholder="Post Title"
-                                   name="article[title]">
+                                   name="article[title]" value="{{ article.title }}">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="article_content">Съдържание</label>
+                        <label class="col-sm-4 control-label" for="article_content">Content</label>
                         <div class="col-sm-6">
-                        <textarea class="form-control" rows="6" id="articles_content"
-                                  name="article[content]"></textarea>
+                        <textarea class="form-control" rows="6" id="article_content"
+                                  name="article[content]">{{ article.content }}</textarea>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="article_image">Изображение</label>
+                        <label class="col-sm-4 control-label" for="article_image">Image URL</label>
                         <div class="col-sm-4 ">
                             <input type="file" class="form-control" id="article_title" placeholder="Image URL"
-                                   name="article[image]">
+                                   name="article[imageURL]">
                         </div>
                     </div>
+
                     {{ form_row(form._token) }}
 
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <a class="btn btn-default" href="{{ path('blog_index') }}">Отказ</a>
-                            <button type="submit" class="btn btn-primary">Добави</button>
+                            <a class="btn btn-default" href="{{ path('article_view', {id: article.id}) }}">Cancel</a>
+                            <button type="submit" class="btn btn-success">Edit</button>
                         </div>
                     </div>
                 </fieldset>
             </form>
         </div>
     </div>
-
-
 {% endblock %}
+

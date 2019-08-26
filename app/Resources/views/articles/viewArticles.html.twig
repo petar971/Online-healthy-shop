@@ -14,8 +14,8 @@
                         </div>
                         <div class="row content-article" style="">
                             <h4 style="">{{ article.title }}</h4>
-                            <h5>{{ article.content }}</h5>
-                            <a href="" class=" btn btn-success">Read more</a>
+
+                            <a href="{{ path('viewOne_article',{id: article.id}) }}" class=" btn btn-success">Прочети</a>
                             <p style="color:black">Date:10/23/1230</p>
                         </div>
 

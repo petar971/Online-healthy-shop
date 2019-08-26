@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+ {% block main %}
+     <div style="background-color:rgba(255,255,255,0.7);margin-top:70px;">
+         <div class="row" style="margin-right: 0;">
+             <div class="col-md-12 col-sm-12 col-lg-12">
+                 <h1 style="">{{ article.title }}</h1>
+                 <a class="btn btn-default btn-xs" href="{{ path('article_view') }}">back &raquo;</a>
+             </div>
+         </div>
+         <div class="row" style="margin-left:0;margin-right: 0;">
+
+             <div class="col-md-5 col-sm-6 col-xs-12 article">
+
+
+                 <img src="{{ asset('uploads/images/articles/') ~ article.image}}" style="" class="img-responsive">
+
+
+             </div>
+             <div class="col-md-7 col-sm-6 col-xs-12 article">
+                 <div class="" style="">
+
+                     <p style="color:black;font-family: sans-serif;"> {{ article.content }}	</p>
+
+                 </div>
+
+
+             </div>
+         </div>
+     </div>
+
+        {% endblock %}

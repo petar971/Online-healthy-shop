@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" enctype="multipart/form-data"  action="{{ path('product_create') }}" method="POST">
+                <fieldset>
+                    <legend>New Product</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_title">Име</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="product_name" placeholder="Post Title"
+                                   name="product[name]">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_content">Описание</label>
+                        <div class="col-sm-6">
+                        <textarea class="form-control" rows="6" id="articles_content"
+                                  name="product[description]"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_title">цена</label>
+                        <div class="col-sm-4 ">
+                            <input type="number" step="any" class="form-control" id="article_title" placeholder="Post Title"
+                                   name="product[price]">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_title">Производител</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="article_title" placeholder="Post Title"
+                                   name="product[maker]">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_image">Изображение</label>
+                        <div class="col-sm-4 ">
+                            <input type="file" class="form-control" id="article_title" placeholder="Image URL"
+                                   name="product[image]">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_title">Категория</label>
+                        {#<div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="article_title" placeholder="Post Title"
+                                   name="product[category]">
+                        </div>#}
+                        <label>
+                            <select name="product[category]">
+                                {% for category in category %}
+                                <option value="{{ category.id }}">{{ category.category }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                    {{ form_row(form._token) }}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('blog_index') }}">Отказ</a>
+                            <button type="submit" class="btn btn-primary">Добави</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

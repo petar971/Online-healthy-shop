@@ -1,7 +1,10 @@
 <?php
 
 namespace AppBundle\Repository;
-
+use AppBundle\Entity\Product;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\Mapping;
 /**
  * ProductRepository
  *
@@ -10,4 +13,44 @@ namespace AppBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em, Mapping\ClassMetadata $metaData = null)
+    {
+        parent::__construct($em,
+            $metaData == null ?
+                new Mapping\ClassMetadata(Product::class): $metaData);
+    }
+
+    public function insert(Product $product)
+    {
+
+        try {
+            $this->_em->persist($product);
+            $this->_em->flush();
+            return true;
+        } catch (OptimisticLockException $e) {
+            return false;
+        }
+    }
+    public function update(Product $product)
+    {
+
+        try {
+            $this->_em->merge($product);
+            $this->_em->flush();
+            return true;
+        } catch (OptimisticLockException $e) {
+            return false;
+        }
+    }
+    public function remove(Product $product)
+    {
+
+        try {
+            $this->_em->remove($product);
+            $this->_em->flush();
+            return true;
+        } catch (OptimisticLockException $e) {
+            return false;
+        }
+    }
 }

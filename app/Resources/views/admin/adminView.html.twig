@@ -4,7 +4,11 @@
 
     {% block main %}
 
-       <h2>Hi admin</h2>
-<a href="{{ path('article_create') }}">Създай статия</a>
+       <h2>Здравей, {{ app.user.FirstName }}</h2>
+        <ul>
+            <li style="padding: 10px;background-color: orange"><a href="{{ path('article_create') }}" style="text-decoration: none;font-size: large;color:black">Създай статия</a></li>
+            <li style="padding: 10px;background-color: darkorange"><a href="{{ path('article_delete_view') }}" style="text-decoration: none;font-size: large;color:black">Изтрий статия</a></li>
+            <li style="padding: 10px;background-color: darkorange"><a href="{{ path('product_create') }}" style="text-decoration: none;font-size: large;color:black">Добави продукт</a></li>
+        </ul>
     {% endblock %}
 {% endblock %}
