@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +56,12 @@ class UserAddress
      * @ORM\Column(name="GSM", type="string", length=255)
      */
     private $GSM;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ShoppingCart",mappedBy="address")
+     */
+    private $orders;
 
     /**
      * @var

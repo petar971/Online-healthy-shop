@@ -15,6 +15,8 @@ class ShoppingCart
 {
     public function __construct()
     {
+        $this->status=false;
+        $this->dateAdded = new \DateTime('now');
         $this->products = new ArrayCollection();
     }
 
@@ -33,16 +35,35 @@ class ShoppingCart
      */
     private $user;
 
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateAdded", type="datetime")
+     */
+    private $dateAdded;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="status", type="boolean")
+     */
+    private $status;
     /**
      * @var ArrayCollection
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product",inversedBy="order")
      */
     private $products;
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\UserAddress",inversedBy="orders")
+     */
+    private $address;
+    /**
      * Get id
      *
      * @return int
      */
+
     public function getId()
     {
         return $this->id;
@@ -78,6 +99,38 @@ class ShoppingCart
     public function setProduct($products)
     {
         $this->products = $products;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param bool $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
     }
 }
 

@@ -4,7 +4,13 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ShoppingCart;
+use AppBundle\Entity\User;
+use AppBundle\Entity\UserAddress;
+use AppBundle\Repository\ShoppingCartRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\OrderBy;
 use http\Client\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,17 +18,23 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ShoppingCartController extends Controller
 {
+    private $cartRepository;
+    public function __construct(ShoppingCartRepository $cartRepository)
+    {
+        $this->cartRepository=$cartRepository;
+    }
 
     /**
      * @Route("/cart",name="view_cart")
-     * @param $id
      * @return Response
      */
     public function ViewCart()
     {
         $currentUser=$this->getUser();
-        $products=$this->getDoctrine()->getRepository(ShoppingCart::class)->findBy(
+        $products=$this->getDoctrine()->getRepository(ShoppingCart::class)
+            ->findBy(
             [
+                'status' => false,
                 'user' => $currentUser
             ]);
         /*   $category=$products->getCategory();*/
@@ -85,5 +97,92 @@ class ShoppingCartController extends Controller
 
     }
 
+    /**
+     * @Route("/buy",name="buy_product")
+     */
+public function BuyProduct()
+{
 
+    $currentUser=$this->getUser();
+    $products=$this->getDoctrine()->getRepository(ShoppingCart::class)
+        ->findBy(
+            [
+                'status' => false,
+                'user' => $currentUser
+            ]);
+    $em = $this->getDoctrine()->getManager();
+    for($i=0;$i<sizeof($products);$i++)
+    {
+
+        $products[$i]->setStatus(1);
+        $em->persist($products[$i]);
+    }
+    $em->flush();
+return $this->render('default/index.html.twig');
+}
+    /**
+     *@Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Route("/admin/orders",name="view_orders")
+     */
+    public function ViewOrders()
+    {
+        $currentUser=$this->getUser();
+
+        if($currentUser->isAdmin())
+        {
+        /** @var ShoppingCart $products */
+            $products=$this->getDoctrine()->getRepository(ShoppingCart::class)
+                ->findBy(
+                    [
+
+                        'status' => true,
+                    ],
+                    [
+                        'user' => 'DESC'
+                    ]);
+
+        $users=$this->cartRepository->FindByAllIdUsersWithOrder();
+
+        return $this->render('admin/orders.html.twig',
+            [
+                'users'=>$users,
+                'products' => $products
+            ]);
+
+    }
+        return $this->render('default/index.html.twig');
+    }
+
+/**
+ *@Security("is_granted('IS_AUTHENTICATED_FULLY')")
+ * @Route("/admin/order/{id}",name="one_order")
+ */
+public function ViewOneOrder($id)
+{
+    $currentUser=$this->getUser();
+
+    if($currentUser->isAdmin())
+    {
+        /** @var ShoppingCart $products */
+        $products=$this->getDoctrine()->getRepository(ShoppingCart::class)
+            ->findBy(
+                [
+                    'id'=>$id,
+                    'status' => true,
+                ],
+                [
+                    'user' => 'DESC'
+                ]);
+
+        $products1=$this->cartRepository->FindByAllProductFromUser($id);
+
+
+        return $this->render('admin/OneOrderView.html.twig',
+            [
+                'products' => $products1
+            ]);
+
+    }
+    return $this->render('default/index.html.twig');
+}
 }

@@ -1,0 +1,60 @@
+
+<style>
+    .custab{
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin: 5% 0;
+        box-shadow: 3px 3px 2px #ccc;
+        transition: 0.5s;
+    }
+    .custab:hover{
+        box-shadow: 3px 3px 0px transparent;
+        transition: 0.5s;
+    }
+
+</style>
+<div class="container">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+            <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Цена</th>
+                <th>Количество</th>
+            </tr>
+            </thead>
+            {% for cart in products%}
+            <tr>
+                <td>{{ cart.product.name }}</td>
+                <td>{{ cart.product.price }}</td>
+                <td>-</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+
+<div class="container" style="">
+    <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+            <thead>
+            <tr>
+                <th>Име</th>
+                <th>Имейл</th>
+                <th>Телефон</th>
+                <th>Град</th>
+                <th>Офис</th>
+            </tr>
+            </thead>
+
+                <tr>
+                    <td>{{ products[0].user.firstName }} {{ products[0].user.lastName }}</td>
+                    <td>{{ products[0].user.email }}</td>
+                    <td>{{ products[0].address.GSM }}</td>
+                    <td>{{ products[0].address.city }}</td>
+                    <td>{{ products[0].address.address }}</td>
+                </tr>
+
+        </table>

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\ShoppingCart;
 use AppBundle\Entity\UserAddress;
 use AppBundle\Form\UserAddressType;
 
@@ -36,13 +37,27 @@ class AddressController extends Controller
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         $em->persist($address);
+
+        $products=$this->getDoctrine()->getRepository(ShoppingCart::class)
+            ->findBy(
+                [
+                    'status' => false,
+                    'user' => $currentUser
+                ]);
+        for($i=0;$i<sizeof($products);$i++)
+        {
+
+            $products[$i]->setAddress($address);
+            $em->persist($products[$i]);
+        }
         $em->flush();
 
-        return $this->render('shop/UserAddressForm.html.twig',
+
+
+        return $this->redirectToRoute('buy_product',
             [
-                'form' => $this
-                    ->createForm(UserAddressType::class)
-                    ->createView()
-            ]);
+
+            ]
+        );
     }
 }

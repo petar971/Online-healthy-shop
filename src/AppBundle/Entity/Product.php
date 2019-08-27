@@ -69,6 +69,8 @@ class Product
      *
      */
     private $order;
+
+
     /**
      * Get id
      *
@@ -222,5 +224,7 @@ class Product
     {
         $this->order = $order;
     }
+
+
 }
 

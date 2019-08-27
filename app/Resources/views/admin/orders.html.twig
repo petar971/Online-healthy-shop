@@ -1,0 +1,26 @@
+<table style="width:100%;color: black;background-color: greenyellow">
+    <tr style="border-bottom:1px solid">
+        <th>Име</th>
+        <th>Адрес</th>
+        <th>Град</th>
+
+    </tr>
+    {% for userId in users%}
+        <tr style="border-bottom:1px solid">
+            {#<th>{{ product.user.FirstName }}</th>#}
+
+
+            <th>{{userId.firstName}}{{userId.lastName}}</th>
+            <th>{{userId.email}}</th>
+            <th><a href="{{ path('one_order',{id:userId.id}) }}">Детайли за поръчката</a></th>
+{#
+            <th>{{ product.address.address }}</th>
+            <th>{{ product.address.city }}</th>
+            <th>{{ product.address.GSM }}</th>
+            <th>{{ product.product.name }}</th>
+            <th>{{ product.product.price }}</th>#}
+
+        </tr>
+
+    {% endfor %}
+</table>

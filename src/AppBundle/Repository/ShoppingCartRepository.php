@@ -2,6 +2,11 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\ShoppingCart;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping;
+
 /**
  * ShoppingCartRepository
  *
@@ -10,4 +15,27 @@ namespace AppBundle\Repository;
  */
 class ShoppingCartRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function __construct(EntityManagerInterface $em, Mapping\ClassMetadata $metaData = null)
+    {
+        parent::__construct($em,
+            $metaData == null ?
+                new Mapping\ClassMetadata(ShoppingCart::class): $metaData);
+    }
+public function FindByAllIdUsersWithOrder()
+{
+    $query=$this->getEntityManager()->createQuery(
+        'SELECT DISTINCT u.id,u.firstName,u.email,u.lastName FROM AppBundle\Entity\ShoppingCart a JOIN a.user u WHERE a.status=1'
+    )->getResult();
+    return $query;
+
+}
+    public function FindByAllProductFromUser($id)
+    {
+        $query=$this->getEntityManager()->createQuery(
+            'SELECT a FROM AppBundle\Entity\ShoppingCart a JOIN a.user user WHERE a.status=1 AND user.id=:id')
+            ->setParameter('id',$id)
+            ->getResult();
+        return $query;
+
+    }
 }
