@@ -26,11 +26,16 @@ class ShoppingCartController extends Controller
                 'user' => $currentUser
             ]);
         /*   $category=$products->getCategory();*/
+        $totalPrice=0;
 
-
+        for($i=0;$i<sizeof($products);$i++)
+        {
+        $totalPrice=$totalPrice + $products[$i]->getProduct()->getPrice();
+        }
 
         return $this->render('shop/shoppingCart.html.twig',
             [
+                'total' =>$totalPrice,
                 'carts' =>$products
             ]);
 
@@ -79,32 +84,6 @@ class ShoppingCartController extends Controller
 
 
     }
-    /**
-     * @Route("/remove/id",name="remove_from_cart")
-     * @param $id
-     * @return Response
-     */
-    public function removeFromCart($id)
-    {
-        $currentUser=$this->getUser();
-        $product=$this->getDoctrine()->getRepository(ShoppingCart::class)->findOneBy(
-            [
-                'id' =>$id,
-                'user' =>$currentUser
-            ]
-        );
-        $products=$this->getDoctrine()->getRepository(ShoppingCart::class)->findAll();
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($product);
-        $em->flush();
-
-        return $this->render('shop/shoppingCart.html.twig',
-            [
-                'carts' => $products
-            ]);
-
-
-    }
 
 }

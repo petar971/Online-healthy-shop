@@ -96,44 +96,31 @@
                         <td class="col-md-1 text-center"><strong>{{ cart.product.price }}</strong></td>
                         <td class="col-md-1 text-center"><strong>$9.98</strong></td>
                         <td class="col-md-1">
-                        <a href="{{ path('remove_from_cart',{id:cart.product.id}) }}" class="btn btn-danger">Премахни</a>
+                        <a href="{#{{ path('remove_from_cart',{id:cart.product.id}) }}#}" class="btn btn-danger" disabled>Премахни</a>
                         </td>
 
                     </tr>
                     {% endfor %}
+
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
-                        <td><h5>Subtotal</h5></td>
-                        <td class="text-right"><h5><strong>$24.59</strong></h5></td>
+                        <td><h3>Общо:</h3></td>
+                        <td class="text-right"><h3><strong>{{ total }}</strong></h3></td>
                     </tr>
                     <tr>
                         <td>   </td>
                         <td>   </td>
                         <td>   </td>
-                        <td><h5>Estimated shipping</h5></td>
-                        <td class="text-right"><h5><strong>$6.94</strong></h5></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td><h3>Total</h3></td>
-                        <td class="text-right"><h3><strong>$31.53</strong></h3></td>
-                    </tr>
-                    <tr>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>   </td>
-                        <td>
+                        {#<td>
                             <button type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                            </button></td>
+                            </button></td>#}
                         <td>
-                            <button type="button" class="btn btn-success">
-                                Checkout <span class="glyphicon glyphicon-play"></span>
-                            </button></td>
+                            <a href="{{ path('delivery_address') }}" style="background-color: orange;color:black;" class="btn" >
+                                Завърши
+                            <a/></td>
                     </tr>
                     </tbody>
                 </table>
