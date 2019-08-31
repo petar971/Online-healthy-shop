@@ -2,6 +2,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Orders;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ShoppingCart;
 use AppBundle\Entity\User;
@@ -68,6 +69,7 @@ class ShoppingCartController extends Controller
             ]
         );
        $product=$this->getDoctrine()->getRepository(Product::class)->find($id);
+
         $category=$product->getCategory()->getId();
         $products=$this
             ->getDoctrine()
@@ -95,6 +97,18 @@ class ShoppingCartController extends Controller
             ]);
 
 
+    }
+
+    /**
+     * @Route("/remove/cart/{id}",name="remove_from_cart")
+     */
+    public function RemoveFromCart($id)
+    {
+        $product=$this->getDoctrine()->getRepository(ShoppingCart::class)->find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
+        return $this->redirectToRoute('view_cart');
     }
 
     /**
@@ -185,4 +199,24 @@ public function ViewOneOrder($id)
     }
     return $this->render('default/index.html.twig');
 }
+/**
+ * @Route("/sent/order/{id}",name="sent_order")
+ */
+public function send($id)
+{
+    $em=$this->getDoctrine()->getManager();
+    $products1=$this->cartRepository->FindByAllProductFromUser($id);
+    foreach($products1 as $item)
+    {
+        $order=new Orders();
+        $order->setProduct($item->getProduct());
+        $order->setUser($item->getUser());
+        $em->persist($order);
+        $em->remove($item);
+    }
+    $em->flush();
+
+    return $this->render('default/index.html.twig');
+}
+
 }

@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -24,6 +25,7 @@ class User implements UserInterface
     private $id;
 
     /**
+     *
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
@@ -38,9 +40,13 @@ class User implements UserInterface
     private $password;
 
     /**
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(min="4", minMessage="Llqlqqll")
      * @var string
      *
      * @ORM\Column(name="FirstName", type="string", length=255)
+     *
      */
     private $firstName;
 
@@ -70,6 +76,7 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\ShoppingCart",mappedBy="user")
+     *
      */
     private $orders;
 
@@ -78,6 +85,14 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserAddress",mappedBy="user")
      */
     private $address;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Orders",mappedBy="user")
+     */
+    private $ProductOrder;
+
+
     public function __construct()
     {
         $this->address = new ArrayCollection();
@@ -314,6 +329,22 @@ class User implements UserInterface
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductOrder()
+    {
+        return $this->ProductOrder;
+    }
+
+    /**
+     * @param mixed $ProductOrder
+     */
+    public function setProductOrder($ProductOrder)
+    {
+        $this->ProductOrder = $ProductOrder;
     }
 }
 

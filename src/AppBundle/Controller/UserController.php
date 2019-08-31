@@ -51,13 +51,14 @@ class UserController extends Controller
 $password=$this->get('security.password_encoder')
     ->encodePassword($user,$user->getPassword());
 $user->setPassword($password);
-            /*if (null !== )) {
-                $this->addFlash("error", "Email already taken");
+            if(null !== $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' =>$form['email']->getData()]))
+            {
+                $this->addFlash("error", "Email e вече регистриран");
                 return $this->render("default/register.html.twig",
                     [
                         'user' => $user
                     ]);
-            }*/
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

@@ -70,7 +70,10 @@ class Product
      */
     private $order;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Orders",mappedBy="product")
+     */
+    private $ProductOrder;
     /**
      * Get id
      *

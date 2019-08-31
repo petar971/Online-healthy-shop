@@ -15,6 +15,8 @@ class ShoppingCart
 {
     public function __construct()
     {
+        $this->quantity=1;
+        $this->isReady=false;
         $this->status=false;
         $this->dateAdded = new \DateTime('now');
         $this->products = new ArrayCollection();
@@ -49,6 +51,9 @@ class ShoppingCart
      * @ORM\Column(name="status", type="boolean")
      */
     private $status;
+
+
+
     /**
      * @var ArrayCollection
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product",inversedBy="order")
@@ -58,6 +63,13 @@ class ShoppingCart
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\UserAddress",inversedBy="orders")
      */
     private $address;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantity", type="integer")
+     */
+    private $quantity;
     /**
      * Get id
      *
@@ -131,6 +143,38 @@ class ShoppingCart
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReady()
+    {
+        return $this->isReady;
+    }
+
+    /**
+     * @param bool $isReady
+     */
+    public function setIsReady($isReady)
+    {
+        $this->isReady = $isReady;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param int $quantity
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
     }
 }
 

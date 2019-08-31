@@ -1,74 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    {#<div class="row">
-        <div class="col-md-12">
-            <div class="card card-body">
-                <h3 class="text-center">MY CART</h3>
-                <hr/>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Product Name</th>
-                                    <th>Model</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for cart in carts %}
-                                    <tr>
-                                        <td><img src="{{ cart.product.image }}" alt="product" width="40px" height="40px"></td>
-                                        <td>{{ cart.product.name }}</td>
-                                        <td>{{ cart.product.price }}</td>
-                                        <td>
-                                            <div class="form-group">
-                                                <select id="quantity_id" class="form-control">
-                                                    <option value="1">1</option>
-                                                </select>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="button-group">
-
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="float-right mt-4 text-right">
-                            <h3>
-                            </h3>
-                        </div>
-                        <div class="clearfix"></div>
-                        <hr/>
-                        <div class="text-right">
-                            <form action="" method="post">
-                                <a href="" class="btn btn-primary">Cancel</a>
-                                <button type="submit" class="btn btn-danger">Checkout</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-#}
-
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-10 col-md-offset-1">
-                <table class="table table-hover" style="background-color: rgba(255,255,255,0.7)">
+                <table class="table " style="background-color: rgba(255,255,255,0.7)">
                     <thead>
                     <tr>
                         <th>Продукт</th>
@@ -91,12 +27,23 @@
                                 </div>
                             </div></td>
                         <td class="col-md-1" style="text-align: center">
-                            <input type="email" class="form-control" id="exampleInputEmail1" value="2">
+                           {# <input type="number" name="quantity" min="1" max="5" class="form-control" value="1">#}
+
+                            <select name="">
+                                    <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+
+
+                            </select>
+
                         </td>
                         <td class="col-md-1 text-center"><strong>{{ cart.product.price }}</strong></td>
-                        <td class="col-md-1 text-center"><strong>$9.98</strong></td>
+                        <td class="col-md-1 text-center"><strong>-</strong></td>
                         <td class="col-md-1">
-                        <a href="{#{{ path('remove_from_cart',{id:cart.product.id}) }}#}" class="btn btn-danger" disabled>Премахни</a>
+                        <a href="{{ path('remove_from_cart',{id:cart.id}) }}" class="btn btn-danger" >Премахни</a>
                         </td>
 
                     </tr>
@@ -107,7 +54,7 @@
                         <td>   </td>
                         <td>   </td>
                         <td><h3>Общо:</h3></td>
-                        <td class="text-right"><h3><strong>{{ total }}</strong></h3></td>
+                        <td class="text-right"><h3><strong>{{ total }}лв</strong></h3></td>
                     </tr>
                     <tr>
                         <td>   </td>

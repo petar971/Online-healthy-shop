@@ -32,9 +32,9 @@
                         {% if app.getUser() and (app.getUser().isAdmin()) %}
                             <li><a href="{{ path('admin_panel') }}">Admin Panel</a></li>
                         {% endif %}
-                        <li class=""><a href="{{ path('healthy_food_view') }}">Храни и напитки<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Билки</a></li>
-                        <li><a href="#">Козметика</a></li>
+                        <li class=""><a href="{{ path('healthy_food_view',{id:1}) }}">Храни и напитки<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ path('healthy_food_view',{id:2}) }}">Билки</a></li>
+                        <li><a href="{{ path('healthy_food_view',{id:3}) }}">Козметика</a></li>
                         <li><a href="{{ path('article_view') }}">Блог</a></li>
                     </ul>
 
@@ -42,9 +42,9 @@
 
 
 
-                        <li><a href="{{ path('blog_index') }}">Профил</a></li>
+                    {#    <li><a href="{{ path('blog_index') }}">Профил</a></li>#}
                         <li><a href="{{ path('security_logout') }}">Изход</a></li>
-                        <li><a href="{{ path('view_cart') }}"><small><img src="{{ asset('image/cart.png') }}"height="50px" width="80px"></small></a></li>
+                        <li><a href="{{ path('view_cart') }}"><small>Моите продукти(1)</small></a></li>
 
                     </ul>
                     {% else %}

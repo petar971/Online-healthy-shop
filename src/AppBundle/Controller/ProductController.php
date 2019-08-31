@@ -19,50 +19,55 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends Controller
 {
     private $productService;
+
     public function __construct(ProductServiceInterface $productService)
     {
-        $this->productService=$productService;
+        $this->productService = $productService;
     }
 
     /**
-     * @Route("/shop/healthyfood",name="healthy_food_view")
+     * @Route("/shop/{id}",name="healthy_food_view")
      * @return Response
      */
-    public function FoodView()
+    public function FoodView($id)
     {
-        $species=$this->getDoctrine()->getRepository(Species::class)->find(1);
-        $category=$this
+        $species = $this->getDoctrine()->getRepository(Species::class)->find($id);
+        $category = $this
             ->getDoctrine()
             ->getRepository(Category::class)
             ->findBy([
-                'species'=>1
+                'species' => $id
             ]);
 
-        $products=$this->getDoctrine()
+        $products = $this->getDoctrine()
             ->getRepository(Product::class)
-            ->findBy([],['price'=> 'DESC']);
+            ->findBy([
+                'category' => $category
+            ], ['price' => 'DESC']);
         // replace this example code with whatever you need
-        return $this->render('shop/healthyfood.html.twig',[
-            'products'=>$products,
-            'category'=>$category
+        return $this->render('shop/healthyfood.html.twig', [
+            'products' => $products,
+            'category' => $category
         ]);
 
     }
 
+
     /**
-     * @Route("/shop/healthyfood/{id}",name="group_food_view")
+     * @Route("/shop/category/{id}",name="group_food_view")
      * @param $id
      * @return Response
      */
     public function FoodGroupView($id)
     {
-        $category=$this
+        $species=$this->getDoctrine()->getRepository(Category::class)->find($id)->getSpecies();
+        $category = $this
             ->getDoctrine()
             ->getRepository(Category::class)
             ->findBy([
-                'species'=>1
+                'species' => $species
             ]);
-        $products=$this
+        $products = $this
             ->getDoctrine()
             ->getRepository(Product::class)
             ->findBy(
@@ -78,6 +83,7 @@ class ProductController extends Controller
             ]);
 
     }
+
     /**
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @Route("/product/create",name="product_create", methods={"GET"})
@@ -85,20 +91,20 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $category=$this->getDoctrine()->getRepository(Category::class)->findAll();
+        $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $currentUser = $this->getUser();
-        if($currentUser->isAdmin()) {
+        if ($currentUser->isAdmin()) {
             return $this->render("admin/createProduct.html.twig",
                 ['form' => $this->createForm(ProductType::class)
                     ->createView(),
-                    'category'=>$category
+                    'category' => $category
                 ]);
         }
         return $this->render("articles/viewArticles.html.twig");
     }
     /**
      * @Route("/product/create",methods={"POST"})
-     *@Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @return Response
      * @throws \Exception
@@ -137,4 +143,29 @@ class ProductController extends Controller
             $product->setImage($filename);
         }
     }
+
+    /**
+     * @Route("/details/{id}",name="view_oneProduct")
+     *
+     * @param $id
+     * @return Response
+     */
+    public function viewOneProduct($id)
+    {
+
+        $product = $this
+            ->getDoctrine()
+            ->getRepository(Product::class)
+            ->find($id);
+
+
+        return $this->render("shop/oneProductDetails.html.twig",
+            [
+                'product' => $product,
+
+            ]);
+    }
+
+
 }
+

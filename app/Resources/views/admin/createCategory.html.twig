@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" enctype="multipart/form-data"  action="{{ path('category_create') }}" method="POST">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_image">Име категория</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="article_title" placeholder="Име на категория"
+                                   name="appbundle_category[category]">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_title">Раздел</label>
+                        {#<div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="article_title" placeholder="Post Title"
+                                   name="product[category]">
+                        </div>#}
+                        <label>
+                            <select name="appbundle_category[species]">
+                                {% for species in species %}
+                                   <option value="{{ species.id }}">{{ species.species }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                    {{ form_row(form._token) }}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('blog_index') }}">Отказ</a>
+                            <button type="submit" class="btn btn-primary">Добави</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
