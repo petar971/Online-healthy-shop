@@ -14,7 +14,7 @@
                 <h3  class="fadeIn first"style="text-align: center; color:limegreen; font-family: Comic Sans MS, cursive, sans-serif">Вход</h3>
 
                 <label for="user_email"></label><input type="text" id="user_email" class="fadeIn second" name="_username" placeholder="email">
-                <label for="password"></label><input type="text" id="password" class="fadeIn third" name="_password" placeholder="password">
+                <label for="password"></label><input type="password" id="password" class="fadeIn third" name="_password" placeholder="password">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                 <input type="submit" class="fadeIn fourth btn btn-success" value="Вход">
             </form>

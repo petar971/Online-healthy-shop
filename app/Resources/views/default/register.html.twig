@@ -12,6 +12,9 @@
                     </button>
                 </div>
             {% endfor %}
+       {#     {% for error in error %}
+            {{ error.message }}
+            {% endfor %}#}
 
             <form action="{{ path('user_register') }}" method="post">
                 <fieldset>
@@ -22,7 +25,7 @@
                 <label for="user_email"></label><input type="text" id="user_email" class="fadeIn second" name="user[email]" placeholder="Ел.поща">
                 <label for="user_password"></label><input type="password" id="user_password" class="fadeIn second" name="user[password]" placeholder="Парола">
 
-                <input type="submit" class="fadeIn fourth btn btn-success" value="Вход">
+                <input type="submit" class="fadeIn fourth btn btn-success" value="Регистрация">
                 </fieldset>
             </form>
 

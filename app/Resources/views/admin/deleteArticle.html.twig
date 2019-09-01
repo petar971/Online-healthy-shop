@@ -17,7 +17,7 @@
     <tr style="border-bottom:1px solid">
         <th>{{ article.title }}</th>
         <th><a href="{{ path('article_delete',{id:article.id})}}">Изтрий</a></th>
-        <th><a href="{{ path('article_edit',{id:article.id})}}" disabled="">Редактирай</a></th>
+       {# <th><a href="{{ path('article_edit',{id:article.id})}}" disabled="">Редактирай</a></th>#}
     </tr>
     {% endfor %}
 </table>

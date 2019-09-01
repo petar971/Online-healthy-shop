@@ -12,12 +12,12 @@ class AdminController extends Controller
     /**
      * @Route("/admin", name="admin_panel")
      *
-     *
+     *@Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @return Response
      *
      */
 /*@Security("has_role('ROLE_ADMIN')")
-@Security("is_granted('IIS_AUTHENTICATED_FULLY')")*/
+*/
     public function indexAction()
     {
 

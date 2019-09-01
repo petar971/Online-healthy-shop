@@ -79,6 +79,12 @@ class Product
      *
      * @return int
      */
+
+    public function __construct()
+    {
+        $this->image="55fe25ee2f01579ab4990cf94e110fc5.jpeg";
+    }
+
     public function getId()
     {
         return $this->id;

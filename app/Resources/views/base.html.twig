@@ -43,8 +43,9 @@
 
 
                     {#    <li><a href="{{ path('blog_index') }}">Профил</a></li>#}
+                        <li><a href="{{ path('view_cart') }}"><small>Моите продукти</small></a></li>
                         <li><a href="{{ path('security_logout') }}">Изход</a></li>
-                        <li><a href="{{ path('view_cart') }}"><small>Моите продукти(1)</small></a></li>
+
 
                     </ul>
                     {% else %}
@@ -72,10 +73,9 @@
         {% endblock %}
             </div>
         </div>
+
     </div>
-    {% block footer %}
-        <footer></footer>
-    {% endblock %}
+
 
 
     {% block javascripts %}

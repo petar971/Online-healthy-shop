@@ -27,14 +27,18 @@ class User implements UserInterface
     /**
      *
      * @var string
-     *
+     * @Assert\Email(
+     *     message = " '{{ value }}' не е валиден.",
+     *     checkMX = true
+     * )
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Попълнете всички полета")
+     * @Assert\Length(min="8", minMessage="Паролата трябва да е минимум 8 символа")
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
@@ -42,7 +46,14 @@ class User implements UserInterface
     /**
      *
      * @Assert\NotBlank
-     * @Assert\Length(min="4", minMessage="Llqlqqll")
+     *
+     * @Assert\Regex(
+     *     pattern="/^([A-Z][a-z]+)$/",
+     *     match=true,
+     *     message="Името трябва да започва с главна буква и да не съдържа цифри"
+     * )
+     *
+     * @Assert\Length(min="3", minMessage="Името трябва да е минимум 3 символа")
      * @var string
      *
      * @ORM\Column(name="FirstName", type="string", length=255)
@@ -52,7 +63,13 @@ class User implements UserInterface
 
     /**
      * @var string
-     *
+     * @Assert\Regex(
+     *     pattern="/^([A-Z][a-z]+)$/",
+     *     match=true,
+     *     message="Името трябва да започва с главна буква и да не съдържа цифри"
+     * )
+     * @Assert\NotBlank
+     * @Assert\Length(min="3", minMessage="Фамилията трябва да е минимум 3 символа")
      * @ORM\Column(name="LastName", type="string", length=255)
      */
     private $lastName;

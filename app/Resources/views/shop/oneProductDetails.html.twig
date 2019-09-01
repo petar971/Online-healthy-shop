@@ -1,48 +1,59 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+{% extends 'base.html.twig' %}
+{% block main %}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+    <!-- product -->
+    <div class="product-content product-wrap clearfix product-deatil">
+    <div class="row">
+    <div class="col-md-5 col-sm-12 col-xs-12 ">
+        <div class="product-image">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
-<div id="detail-prod" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="productGrid">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="productGrid"></h4>
+            <div class="item active">
+                <img src="{{ asset('uploads/images/products/') ~ product.image}}" width=350 height=350 alt="">
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="http://placehold.it/350x350" class="img-responsive" alt="a">
-                    </div>
-                    <div class="col-md-8">
-                        <h4>Oписание на продукта:</h4>
-                        <p id="description" style="color:black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, fuga? Debitis accusantium a nihil laboriosam enim fugit unde repudiandae commodi, quo ducimus, vero quibusdam, sint corporis quasi hic culpa laudantium.</p>
-                        <h4>Производител:</h4>
-                        <p style="color:black">{{ product.maker }}</p>
-                        <h4>Цена:</h4><p style="color:black">   .</p>
+
+        </div>
 
 
+    </div>
+    <div class="col-md-7 col-sm-12 col-xs-12">
 
+    <h2 class="name">
+    {{product.name}}
+    <small>Производител:<a href="javascript:void(0);">{{product.maker}}</a></small>
+    </h2>
+    <hr>
+    <h3 class="price-container">
+    {{product.price}}лв.
+    <small>*с ДДС</small>
+    </h3>
+    <div class="certified">
+        <ul>
+            <li><a href="javascript:void(0);">Доставка<span>2 работни дни</span></a></li>
+        </ul>
+    </div>
+    <hr>
+    <div class="description description-tabs">
+        <ul id="myTab" class="nav nav-pills">
+            <li class="active"><a href="#more-information" data-toggle="tab" class="no-margin">Product Description </a></li>
 
+            <!-- <li class=""><a href="#reviews" data-toggle="tab">Reviews</a></li> -->
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="more-information">
+                <br>
+                <strong>Description Title</strong>
+                <p>{{product.description}} </p>
+            </div>
 
-
-                    </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <a href="javascript:void(0);" class="btn btn-success btn-lg">Добави({{product.price}})</a>
                 </div>
 
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn" style="color:white;background-color:rgba(255, 99, 71,1);font-weight: bold;">Назад</button>
-                <a href="" class="btn" style="color:rgba(255, 99, 71,1);font-weight: bold;" >Добави</a>
 
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
+{% endblock %}

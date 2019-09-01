@@ -16,7 +16,7 @@
                             <h4 style="">{{ article.title }}</h4>
 
                             <a href="{{ path('viewOne_article',{id: article.id}) }}" class=" btn btn-success">Прочети</a>
-                            <p style="color:black">Date:10/23/1230</p>
+                            <p style="color:black">{{ article.dateAdded|date("m/d/Y")}}</p>
                         </div>
 
 

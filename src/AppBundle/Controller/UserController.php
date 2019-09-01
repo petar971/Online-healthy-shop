@@ -48,16 +48,30 @@ class UserController extends Controller
 
 
         if($form->isSubmitted()) {
+            $validator = $this->get('validator');
+            $errors = $validator->validate($user);
 $password=$this->get('security.password_encoder')
     ->encodePassword($user,$user->getPassword());
 $user->setPassword($password);
-            if(null !== $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' =>$form['email']->getData()]))
+            if(null !== $this
+                    ->getDoctrine()
+                    ->getRepository(User::class)
+                    ->findOneBy(['email' =>$form['email']->getData()]))
             {
                 $this->addFlash("error", "Email e вече регистриран");
                 return $this->render("default/register.html.twig",
                     [
                         'user' => $user
                     ]);
+            }
+
+            for($i=0;$i<count($errors);$i++)
+            {
+                $this->addFlash('error', $errors[$i]->getMessage());
+            }
+            if(count($errors)> 0)
+            {
+               return $this->render('default/register.html.twig');
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -77,4 +91,8 @@ $user->setPassword($password);
     {
         throw new \Exception("Logout Failed");
     }
+public function validation($user)
+{
+
+}
 }

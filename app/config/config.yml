@@ -11,6 +11,7 @@ parameters:
     product_directory: '%kernel.project_dir%/web/uploads/images/products'
 
 framework:
+    validation: { enable_annotations: true }
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
@@ -19,7 +20,6 @@ framework:
         strict_requirements: ~
     form: ~
     csrf_protection: ~
-    validation: { enable_annotations: true }
     #serializer: { enable_annotations: true }
     default_locale: '%locale%'
     trusted_hosts: ~

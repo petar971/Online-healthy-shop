@@ -27,11 +27,12 @@ class ProductController extends Controller
 
     /**
      * @Route("/shop/{id}",name="healthy_food_view")
+     * @param $id
      * @return Response
      */
     public function FoodView($id)
     {
-        $species = $this->getDoctrine()->getRepository(Species::class)->find($id);
+
         $category = $this
             ->getDoctrine()
             ->getRepository(Category::class)
@@ -44,7 +45,7 @@ class ProductController extends Controller
             ->findBy([
                 'category' => $category
             ], ['price' => 'DESC']);
-        // replace this example code with whatever you need
+
         return $this->render('shop/healthyfood.html.twig', [
             'products' => $products,
             'category' => $category
