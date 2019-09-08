@@ -30,14 +30,16 @@
                 <th>Продукт</th>
                 <th>Цена</th>
                 <th>Количество</th>
+                <th>Тотал</th>
             </tr>
             </thead>
             {% for cart in products%}
             <tr>
                 <td>{{ cart.product.name }}</td>
-                <td>{{ cart.product.price }}</td>
+                <td>{{ cart.product.price }}лв.</td>
+                <td>{{ cart.quantity }}</td>
+                <td>{{ cart.quantity *  cart.product.price}}лв.</td>
 
-                <td>-</td>
             </tr>
             {% endfor %}
 

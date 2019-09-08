@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="bilkaria" uploadOnCheckin="e4aeb7c9-7f3e-4d2d-a71e-00ba190a9516">
+    <serverData>
+      <paths name="bilkaria">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="bilkaria" />
+  </component>
+</project>

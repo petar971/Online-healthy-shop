@@ -4,10 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
-use AppBundle\Entity\Species;
 use AppBundle\Form\ProductType;
 use AppBundle\Service\Product\ProductServiceInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
@@ -15,6 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class ProductController extends Controller
 {
@@ -61,6 +60,8 @@ class ProductController extends Controller
      */
     public function FoodGroupView($id)
     {
+
+
         $species=$this->getDoctrine()->getRepository(Category::class)->find($id)->getSpecies();
         $category = $this
             ->getDoctrine()
@@ -68,6 +69,7 @@ class ProductController extends Controller
             ->findBy([
                 'species' => $species
             ]);
+
         $products = $this
             ->getDoctrine()
             ->getRepository(Product::class)
@@ -77,8 +79,11 @@ class ProductController extends Controller
                 ]
             );
 
+
+
         return $this->render('shop/healthyfood.html.twig',
             [
+
                 'products' => $products,
                 'category' => $category
             ]);
@@ -153,6 +158,8 @@ class ProductController extends Controller
      */
     public function viewOneProduct($id)
     {
+
+
 
         $product = $this
             ->getDoctrine()

@@ -5,15 +5,13 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Orders;
 use AppBundle\Entity\Product;
 use AppBundle\Entity\ShoppingCart;
-use AppBundle\Entity\User;
-use AppBundle\Entity\UserAddress;
+use AppBundle\Form\ShoppingCartType;
 use AppBundle\Repository\ShoppingCartRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping\OrderBy;
-use http\Client\Request;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -43,7 +41,7 @@ class ShoppingCartController extends Controller
 
         for($i=0;$i<sizeof($products);$i++)
         {
-        $totalPrice=$totalPrice + $products[$i]->getProduct()->getPrice();
+        $totalPrice=$totalPrice + $products[$i]->getProduct()->getPrice()*$products[$i]->getQuantity();
         }
 
         return $this->render('shop/shoppingCart.html.twig',
@@ -54,12 +52,14 @@ class ShoppingCartController extends Controller
 
 
     }
+
     /**
      * @Route("cart/add/{id}",name="add_cart")
      * @param $id
+     * @param Request $request
      * @return Response
      */
-    public function AddToCart($id)
+    public function AddToCart($id,Request $request)
     {
         $currentUser=$this->getUser();
         $cart=$this->getDoctrine()->getRepository(ShoppingCart::class)->findOneBy(
@@ -67,7 +67,19 @@ class ShoppingCartController extends Controller
                 'id' =>$id,
                 'user' =>$currentUser
             ]
+
         );
+
+
+        $form=$this->createForm(ShoppingCartType::class);
+        $form->handleRequest($request);
+        $quantity=1;
+        if ($form->isSubmitted()) {
+            $quantity = $form->getData()->getQuantity();
+
+
+        }
+
        $product=$this->getDoctrine()->getRepository(Product::class)->find($id);
 
         $category=$product->getCategory()->getId();
@@ -81,17 +93,19 @@ class ShoppingCartController extends Controller
             );
         if($cart==null)
         {
+
             $cart=new ShoppingCart();
             $cart->setProduct($product);
             $cart->setUser($currentUser);
+            $cart->setQuantity($quantity);
+
         }
         $em = $this->getDoctrine()->getManager();
         $em->persist($cart);
         $em->flush();
 
-
         return $this->redirectToRoute('group_food_view',
-            [
+            ['form' =>$this->createForm(ShoppingCartType::class)->createView(),
                 'products' =>$products,
                 'id' =>$category
             ]);
@@ -113,6 +127,7 @@ class ShoppingCartController extends Controller
 
     /**
      * @Route("/buy",name="buy_product")
+     * @return Response
      */
 public function BuyProduct()
 {
@@ -199,9 +214,12 @@ public function ViewOneOrder($id)
     }
     return $this->render('default/index.html.twig');
 }
-/**
- * @Route("/sent/order/{id}",name="sent_order")
- */
+
+    /**
+     * @Route("/sent/order/{id}",name="sent_order")
+     * @param $id
+     * @return Response
+     */
 public function send($id)
 {
     $em=$this->getDoctrine()->getManager();

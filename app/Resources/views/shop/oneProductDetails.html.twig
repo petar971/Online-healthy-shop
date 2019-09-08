@@ -1,59 +1,99 @@
 
 {% extends 'base.html.twig' %}
 {% block main %}
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="col-sm-12 col-md-12 col-lg-12">
-    <!-- product -->
-    <div class="product-content product-wrap clearfix product-deatil">
-    <div class="row">
-    <div class="col-md-5 col-sm-12 col-xs-12 ">
-        <div class="product-image">
+    <div class="container" style="background-color: whitesmoke;margin-top: 70px;">
 
+        <!-- Portfolio Item Heading -->
+        <h1 class="my-4">{{ product.name }}
 
+        </h1>
 
-            <div class="item active">
-                <img src="{{ asset('uploads/images/products/') ~ product.image}}" width=350 height=350 alt="">
+        <!-- Portfolio Item Row -->
+        <div class="row">
+
+            <div class="col-md-8">
+                <img class="img-fluid" src="{{ asset('uploads/images/products/') ~ product.image}}" alt="">
             </div>
+
+            <div class="col-md-4">
+                <h3 class="my-3">Описание:</h3>
+                <p style="color: #0d0d0d">{{ product.description }}</p>
+            </div>
+            <div class="col-md-4">
+                <form action="{{ path('add_cart', {'id':product.id}) }}"method="post">
+                    <span>Количество</span> <select name="appbundle_shoppingcart[quantity]">
+                               <option value=1>1</option>
+                               <option value=2>2</option>
+                               <option value=3>3</option>
+                               <option value=4>4</option>
+                               <option value=5>5</option>
+                            </select>
+
+                    <button type="submit" class="btn btn-success">Добави</button>
+                </form>
+
+            </div>
+
+
 
         </div>
+        <!-- /.row -->
+
+        <!-- Related Projects Row -->
+        <h3 class="my-4">Най-продавани</h3>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <article class="card-wrapper">
+                    <div class="image-holder">
+                        <a href="{{ path('add_cart',{id:product.id}) }}" class="image-holder__link"></a>
+                        <div class="image-liquid image-holder--original" style="background-image:url({{ asset('uploads/images/products/') ~ product.image}})">
+                        </div>
+                    </div>
+                    <div class="product-description">
+                        <!-- title -->
+                        <h1 class="product-description__title">
+                            <a href="#">
+                                {{ product.name }}
+                            </a>
+                        </h1>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-8 product-description__category secondary-text" id="des">
+                                Производител:{{ product.maker }}
+                            </div>
+                            <div class="col-xs-12 col-sm-4 product-description__price">
+                                {{ product.price }}лв.
+                            </div>
+                        </div>
 
 
-    </div>
-    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <hr />
 
-    <h2 class="name">
-    {{product.name}}
-    <small>Производител:<a href="javascript:void(0);">{{product.maker}}</a></small>
-    </h2>
-    <hr>
-    <h3 class="price-container">
-    {{product.price}}лв.
-    <small>*с ДДС</small>
-    </h3>
-    <div class="certified">
-        <ul>
-            <li><a href="javascript:void(0);">Доставка<span>2 работни дни</span></a></li>
-        </ul>
-    </div>
-    <hr>
-    <div class="description description-tabs">
-        <ul id="myTab" class="nav nav-pills">
-            <li class="active"><a href="#more-information" data-toggle="tab" class="no-margin">Product Description </a></li>
+                        <div class="color-wrapper">
+                            <a href="{{ path('view_oneProduct',{id:product.id}) }}" class="btn openmodal" style="background-color:rgba(255, 99, 71,1);color:white" onclick=""><b>Детайли</b></a>
 
-            <!-- <li class=""><a href="#reviews" data-toggle="tab">Reviews</a></li> -->
-        </ul>
-        <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active in" id="more-information">
-                <br>
-                <strong>Description Title</strong>
-                <p>{{product.description}} </p>
+                            {#<span>Количество#}{#</span> <select name="appbundle_shoppingcart[quantity]">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                             </select>#}
+
+                            <br />
+
+                            <span>{{ product.description }}</span>
+
+                        </div>
+                    </div>
+                </article>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12 col-md-6 col-lg-6">
-                    <a href="javascript:void(0);" class="btn btn-success btn-lg">Добави({{product.price}})</a>
-                </div>
 
+        </div>
+        <!-- /.row -->
 
+    </div>
+    <!-- /.container -->
 
 {% endblock %}

@@ -8,8 +8,9 @@
                     <thead>
                     <tr>
                         <th>Продукт</th>
-                        {#<th>Количество</th>#}
+
                         <th class="text-center">Цена</th>
+                        <th>Количество</th>
                         <th class="text-center">Тотал</th>
                         <th> </th>
                     </tr>
@@ -19,9 +20,9 @@
                     <tr>
                         <td class="col-md-6">
                             <div class="media">
-                                <a class="thumbnail pull-left" href="#"> <img class="media-object" src="{{ asset('uploads/images/products/') ~ cart.product.image}}" style="width: 72px; height: 72px;"> </a>
+                                <a class="thumbnail pull-left" href="{{ path('view_oneProduct', {'id': cart.product.id}) }}"> <img class="media-object" src="{{ asset('uploads/images/products/') ~ cart.product.image}}" style="width: 72px; height: 72px;"> </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading"><a href="#">{{ cart.product.name }}</a></h4>
+                                    <h4 class="media-heading"><a href="{{ path('view_oneProduct', {'id': cart.product.id}) }}">{{ cart.product.name }}</a></h4>
                                     <h5 class="media-heading"> производител <a href="#">{{ cart.product.maker }}</a></h5>
 
                                 </div>
@@ -40,8 +41,9 @@
                             </select>
 
                         </td>#}
-                        <td class="col-md-1 text-center"><strong>{{ cart.product.price }}</strong></td>
-                        <td class="col-md-1 text-center"><strong>-</strong></td>
+                        <td class="col-md-1 text-center"><strong>{{ cart.product.price }}лв.</strong></td>
+                        <td class="col-md-1 text-center"><strong>{{ cart.quantity }}</strong></td>
+                        <td class="col-md-1 text-center"><strong>{{ cart.quantity * cart.product.price }}лв.</strong></td>
                         <td class="col-md-1">
                         <a href="{{ path('remove_from_cart',{id:cart.id}) }}" class="btn btn-danger" >Премахни</a>
                         </td>

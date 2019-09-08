@@ -20,8 +20,8 @@ margin-left: 0;" onclick="closeNav()">&times;</a>
             <div class="col-md-9 col-sm-8 col-xs-12 slider-text	" style="padding:0;">
                 <div class="slide-text" style="">
                     <marquee behavior="scroll" direction="left" style="">
-                        <span style="">БЕЗПЛАТНО Мелене на брашно</span>
-                        <span style="">БЕЗПЛАТНО доставка при поръчка над 50лв.</span>
+                        <span style="">БЕЗПЛАТНО мелене на брашно в мелница с каменни дискове</span>
+                        <span style="">БЕЗПЛАТНА доставка при поръчка над 50лв.</span>
                     </marquee>
                 </div>
             </div>
@@ -33,6 +33,7 @@ margin-left: 0;" onclick="closeNav()">&times;</a>
         <div class="row">
 
 {% for product in products %}
+
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <article class="card-wrapper">
                     <div class="image-holder">
@@ -60,18 +61,18 @@ margin-left: 0;" onclick="closeNav()">&times;</a>
                         <hr />
 
                         <div class="color-wrapper">
-                            {#<a href="{{ path('view_oneProduct',{id:product.id}) }}" class="btn openmodal" style="background-color:rgba(255, 99, 71,1);color:white" onclick=""><b>Детайли</b></a>
-#}{#
+                            <a href="{{ path('view_oneProduct',{id:product.id}) }}" class="btn openmodal" style="background-color:rgba(255, 99, 71,1);color:white" onclick=""><b>Детайли</b></a>
 
-                            <span>Количество</span> <select name="">
+                            {#<span>Количество#}{#</span> <select name="appbundle_shoppingcart[quantity]">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
-                             </select>
+                             </select>#}
+
                             <br />
-#}
+
                             <span>{{ product.description }}</span>
 
                         </div>
@@ -82,13 +83,7 @@ margin-left: 0;" onclick="closeNav()">&times;</a>
 
 
 
-
 {% endfor %}
-
-
-        </div>
-    </div>
-
 
 
 {#
@@ -132,6 +127,8 @@ margin-left: 0;" onclick="closeNav()">&times;</a>
     </div><!-- /.modal -->#}
 
     <script>
+
+
         new WOW().init();
         /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
         function openNav() {
