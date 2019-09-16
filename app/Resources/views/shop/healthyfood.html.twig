@@ -20,7 +20,7 @@ margin-left: 0;" onclick="closeNav()">&times;</a>
             <div class="col-md-9 col-sm-8 col-xs-12 slider-text	" style="padding:0;">
                 <div class="slide-text" style="">
                     <marquee behavior="scroll" direction="left" style="">
-                        <span style="">БЕЗПЛАТНО мелене на брашно в мелница с каменни дискове</span>
+                        <span style="">БЕЗПЛАТНО мелене на семена в мелница с каменни дискове</span>
                         <span style="">БЕЗПЛАТНА доставка при поръчка над 50лв.</span>
                     </marquee>
                 </div>
@@ -85,49 +85,11 @@ margin-left: 0;" onclick="closeNav()">&times;</a>
 
 {% endfor %}
 
-
-{#
-    <div id="detail-prod" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="productGrid">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" id="productGrid"></h4>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="http://placehold.it/350x350" class="img-responsive" alt="a">
-                        </div>
-                        <div class="col-md-8">
-                            <h4>Oписание на продукта:</h4>
-                            <p id="description" style="color:black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae, fuga? Debitis accusantium a nihil laboriosam enim fugit unde repudiandae commodi, quo ducimus, vero quibusdam, sint corporis quasi hic culpa laudantium.</p>
-                            <h4>Производител:</h4>
-                            <p style="color:black">Gosho</p>
-                            <h4>Цена:</h4><p style="color:black">   .</p>
-
-
-
-
-
-
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn" style="color:white;background-color:rgba(255, 99, 71,1);font-weight: bold;">Назад</button>
-                    <a href="" class="btn" style="color:rgba(255, 99, 71,1);font-weight: bold;" >Добави</a>
-
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->#}
+            <div class="navigation text-center">
+                {{ knp_pagination_render(products) }}
+            </div>
 
     <script>
-
 
         new WOW().init();
         /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */

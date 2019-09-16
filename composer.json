@@ -20,7 +20,7 @@
         ]
     },
     "require": {
-        "php": ">7",
+        "php": "5.6.3",
         "doctrine/annotations": "^1.4",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
@@ -68,6 +68,9 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
-        "branch-alias": null
+        "branch-alias": null,
+        "symfony": {
+            "require": "2.8.*"
+        }
     }
 }

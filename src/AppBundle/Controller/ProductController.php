@@ -29,7 +29,7 @@ class ProductController extends Controller
      * @param $id
      * @return Response
      */
-    public function FoodView($id)
+    public function FoodView($id,Request $request)
     {
 
         $category = $this
@@ -45,8 +45,18 @@ class ProductController extends Controller
                 'category' => $category
             ], ['price' => 'DESC']);
 
+
+        $paginator=$this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $products,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+
+        );
+
         return $this->render('shop/healthyfood.html.twig', [
-            'products' => $products,
+            'products' => $result,
             'category' => $category
         ]);
 
@@ -58,7 +68,7 @@ class ProductController extends Controller
      * @param $id
      * @return Response
      */
-    public function FoodGroupView($id)
+    public function FoodGroupView(Request $request,$id)
     {
 
 
@@ -80,11 +90,19 @@ class ProductController extends Controller
             );
 
 
+        $paginator=$this->get('knp_paginator');
+        $result = $paginator->paginate(
+            $products,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+
+        );
 
         return $this->render('shop/healthyfood.html.twig',
             [
 
-                'products' => $products,
+                'products' => $result,
                 'category' => $category
             ]);
 
@@ -120,13 +138,17 @@ class ProductController extends Controller
     public function createProcess(Request $request)
     {
         $product = new Product();
-
+        $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         $this->uploadImage($form, $product);
         $this->productService->create($product);
 
-        return $this->redirectToRoute("blog_index");
+       /* return $this->redirectToRoute("blog_index");*/
+        return $this->render('admin/createProduct.html.twig',['category'=>$category,
+            'form' => $this->createForm(ProductType::class)
+                ->createView()
+            ]);
     }
 
     /**
@@ -147,6 +169,7 @@ class ProductController extends Controller
                 $filename
             );
             $product->setImage($filename);
+
         }
     }
 
@@ -175,5 +198,43 @@ class ProductController extends Controller
     }
 
 
+
+    /**
+     * @Route("/shop/category/{id}/{page}",name="group_food_view_page")
+     * @param $id
+     * @return Response
+     */
+    public function FoodGroupViewPage($id)
+    {
+
+
+        $species=$this->getDoctrine()->getRepository(Category::class)->find($id)->getSpecies();
+        $category = $this
+            ->getDoctrine()
+            ->getRepository(Category::class)
+            ->findBy([
+                'species' => $species
+            ]);
+
+        $products = $this
+            ->getDoctrine()
+            ->getRepository(Product::class)
+            ->findBy(
+                [
+                    'category' => $id
+                ],[],2
+            );
+
+
+
+
+        return $this->render('shop/healthyfood.html.twig',
+            [
+
+                'products' => $products,
+                'category' => $category
+            ]);
+
+    }
 }
 
