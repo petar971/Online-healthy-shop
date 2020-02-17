@@ -20,7 +20,7 @@
                 <p style="color: #0d0d0d">{{ product.description }}</p>
             </div>
             <div class="col-md-4">
-                <form action="{{ path('add_cart', {'id':product.id}) }}"method="post">
+                <form action="{{ path('add_cart', {'id':product.id, 'url1':url1}) }}"method="post">
                     <span>Количество</span> <select name="appbundle_shoppingcart[quantity]">
                                <option value=1>1</option>
                                <option value=2>2</option>
@@ -46,7 +46,7 @@
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <article class="card-wrapper">
                     <div class="image-holder">
-                        <a href="{{ path('add_cart',{id:product.id}) }}" class="image-holder__link"></a>
+                        {#<a href="{{ path('add_cart',{id:product.id}) }}" class="image-holder__link"></a>#}
                         <div class="image-liquid image-holder--original" style="background-image:url({{ asset('uploads/images/products/') ~ product.image}})">
                         </div>
                     </div>

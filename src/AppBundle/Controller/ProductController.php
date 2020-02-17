@@ -50,7 +50,7 @@ class ProductController extends Controller
         $result = $paginator->paginate(
             $products,
             $request->query->getInt('page',1),
-            $request->query->getInt('limit',4)
+            $request->query->getInt('limit',20)
 
 
         );
@@ -90,11 +90,12 @@ class ProductController extends Controller
             );
 
 
+
         $paginator=$this->get('knp_paginator');
         $result = $paginator->paginate(
             $products,
             $request->query->getInt('page',1),
-            $request->query->getInt('limit',4)
+            $request->query->getInt('limit',20)
 
 
         );
@@ -177,9 +178,10 @@ class ProductController extends Controller
      * @Route("/details/{id}",name="view_oneProduct")
      *
      * @param $id
+     * @param Request $request
      * @return Response
      */
-    public function viewOneProduct($id)
+    public function viewOneProduct($id,Request $request)
     {
 
 
@@ -190,8 +192,10 @@ class ProductController extends Controller
             ->find($id);
 
 
+
         return $this->render("shop/oneProductDetails.html.twig",
             [
+                'url1'=> $request->headers->get('referer'),
                 'product' => $product,
 
             ]);

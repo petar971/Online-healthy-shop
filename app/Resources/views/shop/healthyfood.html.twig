@@ -37,7 +37,7 @@ margin-left: 0;" onclick="closeNav()">&times;</a>
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <article class="card-wrapper">
                     <div class="image-holder">
-                        <a href="{{ path('add_cart',{id:product.id}) }}" class="image-holder__link"></a>
+                        <a href="{{ path('view_oneProduct',{id:product.id}) }}" class="image-holder__link"></a>
                         <div class="image-liquid image-holder--original" style="background-image:url({{ asset('uploads/images/products/') ~ product.image}})">
                         </div>
                     </div>

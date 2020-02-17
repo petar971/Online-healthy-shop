@@ -103,12 +103,12 @@ class ShoppingCartController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->persist($cart);
         $em->flush();
-
-        return $this->redirectToRoute('group_food_view',
+        return $this->redirect($request->get('url1'));
+      /*  return $this->redirectToRoute('group_food_view',
             ['form' =>$this->createForm(ShoppingCartType::class)->createView(),
                 'products' =>$products,
                 'id' =>$category
-            ]);
+            ]);*/
 
 
     }
